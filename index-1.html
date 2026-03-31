@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shiney Brain JAMB Tutorial Bootcamp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<style>
+  :root {
+    --blue: #1B4FFF;
+    --blue-dark: #1340D4;
+    --blue-light: #EEF2FF;
+    --yellow: #FFD600;
+    --yellow-dark: #F5C800;
+    --white: #FFFFFF;
+    --gray: #F7F8FC;
+    --text: #0F172A;
+    --muted: #64748B;
+    --border: #E2E8F0;
+    --success: #22C55E;
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--white);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, .brand { font-family: 'Syne', sans-serif; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none;
+  }
+  .logo-icon {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: var(--blue);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .logo-text { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 800; color: var(--text); line-height: 1.1; }
+  .logo-text span { color: var(--blue); }
+  .nav-cta {
+    background: var(--yellow);
+    color: var(--text);
+    font-weight: 700;
+    font-size: 0.875rem;
+    border: none; border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: transform .15s, box-shadow .15s;
+  }
+  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(255,214,0,.5); }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--blue);
+    padding: 72px 5% 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,214,0,.15); border: 1px solid rgba(255,214,0,.4);
+    color: var(--yellow); border-radius: 999px;
+    font-size: 0.8rem; font-weight: 600; padding: 6px 14px;
+    margin-bottom: 20px;
+  }
+  .hero-badge span { width: 7px; height: 7px; border-radius: 50%; background: var(--yellow); animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+  .hero h1 {
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    font-weight: 800; color: var(--white);
+    line-height: 1.15; margin-bottom: 20px;
+  }
+  .hero h1 em { color: var(--yellow); font-style: normal; }
+  .hero p { color: rgba(255,255,255,.8); font-size: 1.05rem; line-height: 1.65; margin-bottom: 32px; }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-yellow {
+    background: var(--yellow); color: var(--text);
+    font-weight: 700; font-size: 1rem;
+    padding: 14px 28px; border-radius: 10px; border: none;
+    cursor: pointer; transition: all .2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-yellow:hover { background: var(--yellow-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,214,0,.4); }
+  .btn-outline {
+    background: transparent; color: var(--white);
+    font-weight: 600; font-size: 1rem;
+    padding: 14px 28px; border-radius: 10px;
+    border: 2px solid rgba(255,255,255,.35);
+    cursor: pointer; transition: all .2s;
+  }
+  .btn-outline:hover { border-color: white; background: rgba(255,255,255,.08); }
+  .hero-stats {
+    display: flex; gap: 24px; margin-top: 36px; flex-wrap: wrap;
+  }
+  .stat { }
+  .stat-num { font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 800; color: var(--yellow); }
+  .stat-label { font-size: 0.8rem; color: rgba(255,255,255,.65); margin-top: 2px; }
+  .hero-img-wrap {
+    display: flex; justify-content: flex-end; align-items: flex-end;
+  }
+  .hero-img {
+    width: 100%; max-width: 460px;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 -20px 60px rgba(0,0,0,.3);
+    object-fit: cover; height: 380px;
+    display: block;
+  }
+  .hero-img-placeholder {
+    width: 100%; max-width: 460px; height: 380px;
+    border-radius: 20px 20px 0 0;
+    background: linear-gradient(135deg, #2563EB 0%, #1E40AF 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: white; gap: 16px;
+    box-shadow: 0 -20px 60px rgba(0,0,0,.3);
+  }
+  .hero-img-placeholder .icon-big { font-size: 64px; }
+  .hero-img-placeholder p { font-size: 1rem; opacity: .7; }
+
+  /* ── URGENCY BANNER ── */
+  .urgency {
+    background: #FFF8DC; border-top: 3px solid var(--yellow); border-bottom: 3px solid var(--yellow);
+    padding: 14px 5%;
+    display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;
+    text-align: center;
+  }
+  .urgency-item { display: flex; align-items: center; gap: 6px; font-weight: 600; font-size: 0.9rem; color: #92400E; }
+  .urgency-item span { font-size: 1.1rem; }
+  .urgency-divider { color: #D97706; font-weight: 300; }
+
+  /* ── SECTION COMMONS ── */
+  section { padding: 72px 5%; }
+  .section-label {
+    font-size: 0.78rem; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--blue); margin-bottom: 10px;
+  }
+  .section-title { font-size: clamp(1.7rem, 3vw, 2.5rem); font-weight: 800; line-height: 1.2; margin-bottom: 12px; }
+  .section-sub { color: var(--muted); font-size: 1rem; line-height: 1.6; max-width: 540px; }
+  .section-head { margin-bottom: 48px; }
+
+  /* ── HOW IT WORKS ── */
+  .how { background: var(--gray); }
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
+  .step {
+    background: white; border-radius: var(--radius); padding: 28px 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.06);
+    position: relative; overflow: hidden;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .step:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,.1); }
+  .step-num {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--blue); color: white;
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px;
+  }
+  .step h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+  .step p { font-size: 0.875rem; color: var(--muted); line-height: 1.5; }
+  .step-connector {
+    position: absolute; top: 34px; right: -20px;
+    width: 40px; height: 2px; background: var(--blue-light);
+    z-index: 1;
+  }
+
+  /* ── SUBJECTS ── */
+  .subject-group { margin-bottom: 48px; }
+  .group-label {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 800;
+    margin-bottom: 20px; color: var(--blue);
+    border-bottom: 3px solid var(--yellow); padding-bottom: 6px;
+  }
+  .subjects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+  .subject-card {
+    background: white; border: 1.5px solid var(--border);
+    border-radius: var(--radius); padding: 24px;
+    cursor: pointer; transition: all .2s;
+    display: flex; flex-direction: column; gap: 12px;
+    position: relative; overflow: hidden;
+  }
+  .subject-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--blue); transform: scaleX(0); transform-origin: left;
+    transition: transform .3s;
+  }
+  .subject-card:hover { border-color: var(--blue); box-shadow: 0 8px 28px rgba(27,79,255,.12); transform: translateY(-3px); }
+  .subject-card:hover::before { transform: scaleX(1); }
+  .subject-icon { font-size: 2rem; }
+  .subject-name { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 800; }
+  .subject-benefit { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+  .subject-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 4px; }
+  .subject-price {
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.2rem; color: var(--blue);
+  }
+  .btn-enroll {
+    background: var(--blue); color: white;
+    font-weight: 700; font-size: 0.8rem;
+    padding: 8px 16px; border-radius: 7px; border: none;
+    cursor: pointer; transition: all .2s;
+  }
+  .btn-enroll:hover { background: var(--blue-dark); }
+
+  /* ── TESTIMONIALS ── */
+  .testi { background: var(--blue); }
+  .testi .section-title, .testi .section-label { color: white; }
+  .testi .section-sub { color: rgba(255,255,255,.7); }
+  .testi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 20px; }
+  .testi-card {
+    background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+    border-radius: var(--radius); padding: 24px;
+    transition: background .2s;
+  }
+  .testi-card:hover { background: rgba(255,255,255,.13); }
+  .testi-stars { color: var(--yellow); font-size: 1rem; margin-bottom: 12px; }
+  .testi-text { color: rgba(255,255,255,.85); font-size: 0.9rem; line-height: 1.6; margin-bottom: 16px; font-style: italic; }
+  .testi-author { display: flex; align-items: center; gap: 10px; }
+  .testi-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--yellow); color: var(--text);
+    font-weight: 800; font-family: 'Syne', sans-serif;
+    display: flex; align-items: center; justify-content: center; font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+  .testi-name { font-weight: 700; color: white; font-size: 0.875rem; }
+  .testi-role { font-size: 0.78rem; color: rgba(255,255,255,.55); }
+
+  /* ── FAQ ── */
+  .faq-list { max-width: 700px; display: flex; flex-direction: column; gap: 12px; }
+  .faq-item {
+    background: var(--gray); border-radius: var(--radius-sm); overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .faq-q {
+    padding: 18px 20px; font-weight: 700; font-size: 0.95rem;
+    cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+    user-select: none;
+  }
+  .faq-q .arrow { transition: transform .3s; font-size: 0.75rem; color: var(--blue); }
+  .faq-q.open .arrow { transform: rotate(180deg); }
+  .faq-a { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height .3s, padding .3s; }
+  .faq-a.open { max-height: 200px; padding: 0 20px 18px; }
+  .faq-a p { color: var(--muted); font-size: 0.9rem; line-height: 1.65; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--text); color: rgba(255,255,255,.7);
+    padding: 40px 5%;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: gap;
+    gap: 20px;
+  }
+  footer .logo-text { color: white; }
+  footer p { font-size: 0.875rem; }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(15,23,42,.65); backdrop-filter: blur(4px);
+    display: none; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: white; border-radius: 20px; width: 100%; max-width: 480px;
+    box-shadow: 0 40px 80px rgba(0,0,0,.25);
+    overflow: hidden;
+    animation: slideUp .3s ease;
+  }
+  @keyframes slideUp { from{transform:translateY(30px);opacity:0} to{transform:translateY(0);opacity:1} }
+  .modal-header {
+    background: var(--blue); padding: 24px 28px;
+    display: flex; align-items: flex-start; justify-content: space-between;
+  }
+  .modal-header h2 { color: white; font-size: 1.2rem; font-weight: 800; }
+  .modal-header p { color: rgba(255,255,255,.75); font-size: 0.85rem; margin-top: 4px; }
+  .modal-close {
+    background: rgba(255,255,255,.15); border: none; color: white;
+    width: 32px; height: 32px; border-radius: 50%;
+    cursor: pointer; font-size: 1.1rem;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-left: 12px;
+    transition: background .2s;
+  }
+  .modal-close:hover { background: rgba(255,255,255,.25); }
+  .modal-body { padding: 28px; }
+  .selected-subject {
+    background: var(--blue-light); border: 1.5px solid #BFCFFE;
+    border-radius: 10px; padding: 14px 16px; margin-bottom: 20px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .selected-subject .label { font-size: 0.8rem; color: var(--blue); font-weight: 600; }
+  .selected-subject .name { font-weight: 700; font-size: 0.95rem; margin-top: 2px; }
+  .selected-subject .price { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 800; color: var(--blue); }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 0.82rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .form-group input {
+    width: 100%; padding: 12px 14px; border: 1.5px solid var(--border);
+    border-radius: 9px; font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.95rem; transition: border .2s, box-shadow .2s; outline: none;
+  }
+  .form-group input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(27,79,255,.1); }
+  .form-group input::placeholder { color: #B0BAC9; }
+  .hint { font-size: 0.78rem; color: var(--muted); margin-top: 5px; }
+  .btn-pay {
+    width: 100%; background: var(--yellow); color: var(--text);
+    font-weight: 800; font-size: 1rem; font-family: 'Syne', sans-serif;
+    padding: 15px; border-radius: 10px; border: none;
+    cursor: pointer; transition: all .2s; margin-top: 8px;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .btn-pay:hover { background: var(--yellow-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255,214,0,.4); }
+  .btn-pay:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+  .secure-note {
+    text-align: center; font-size: 0.78rem; color: var(--muted);
+    margin-top: 12px; display: flex; align-items: center; justify-content: center; gap: 5px;
+  }
+
+  /* ── SUCCESS PAGE ── */
+  #success-page {
+    display: none;
+    min-height: 100vh; background: var(--gray);
+    align-items: center; justify-content: center;
+    padding: 40px 5%;
+  }
+  #success-page.active { display: flex; }
+  .success-card {
+    background: white; border-radius: 24px; max-width: 520px; width: 100%;
+    box-shadow: 0 20px 60px rgba(0,0,0,.1); overflow: hidden;
+    animation: slideUp .4s ease;
+  }
+  .success-top {
+    background: linear-gradient(135deg, #16A34A, #22C55E);
+    padding: 40px 32px; text-align: center;
+  }
+  .success-icon { font-size: 3.5rem; margin-bottom: 12px; }
+  .success-top h1 { color: white; font-size: 1.8rem; margin-bottom: 8px; }
+  .success-top p { color: rgba(255,255,255,.8); font-size: 0.95rem; }
+  .success-body { padding: 32px; }
+  .success-body h2 { font-size: 1.1rem; font-weight: 800; margin-bottom: 16px; }
+  .steps-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+  .steps-list li {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 0.9rem; line-height: 1.5; color: var(--text);
+  }
+  .step-dot {
+    width: 26px; height: 26px; border-radius: 50%; background: var(--blue);
+    color: white; font-size: 0.75rem; font-weight: 800;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+  }
+  .action-btns { display: flex; flex-direction: column; gap: 12px; }
+  .btn-telegram {
+    background: #229ED9; color: white; border: none;
+    padding: 15px 20px; border-radius: 10px; font-weight: 700; font-size: 0.95rem;
+    cursor: pointer; transition: all .2s; text-decoration: none;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .btn-telegram:hover { background: #1A8CC4; transform: translateY(-1px); }
+  .btn-whatsapp {
+    background: #25D366; color: white; border: none;
+    padding: 15px 20px; border-radius: 10px; font-weight: 700; font-size: 0.95rem;
+    cursor: pointer; transition: all .2s; text-decoration: none;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .btn-whatsapp:hover { background: #1EB055; transform: translateY(-1px); }
+  .back-link {
+    text-align: center; margin-top: 20px; font-size: 0.85rem; color: var(--muted);
+  }
+  .back-link a { color: var(--blue); font-weight: 600; cursor: pointer; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--gray); }
+  ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 3px; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 32px; }
+    .hero-img-wrap { justify-content: center; }
+    .hero { padding: 48px 5% 0; }
+    .hero-img-placeholder { max-width: 100%; border-radius: 16px 16px 0 0; height: 240px; }
+    .hero-stats { gap: 20px; }
+    footer { flex-direction: column; text-align: center; }
+    .urgency { gap: 10px; }
+    .urgency-divider { display: none; }
+  }
+  @media (max-width: 500px) {
+    .hero-btns { flex-direction: column; }
+    .btn-yellow, .btn-outline { text-align: center; justify-content: center; }
+  }
+
+  /* ── LOADING SPINNER ── */
+  .spinner {
+    width: 18px; height: 18px; border: 2px solid rgba(0,0,0,.2); border-top-color: var(--text);
+    border-radius: 50%; animation: spin .6s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Toast */
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: var(--text); color: white; padding: 12px 24px; border-radius: 50px;
+    font-size: 0.875rem; font-weight: 600; z-index: 9999;
+    transition: transform .3s; white-space: nowrap;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════ MAIN PAGE ═══════════════════ -->
+<div id="main-page">
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#">
+    <div class="logo-icon">🧠</div>
+    <div class="logo-text"><span>Shiney</span> Brain</div>
+  </a>
+  <button class="nav-cta" onclick="scrollToSubjects()">Enroll Now →</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge"><span></span> Bootcamp Ongoing — Limited Slots!</div>
+      <h1>2 Weeks to JAMB? Don't Fail — Join <em>Shiney Brain</em> Bootcamp Now!</h1>
+      <p>Finish your syllabus fast, practice real past questions, and boost your JAMB score before it's too late. Expert tutors. Proven strategy. Results.</p>
+      <div class="hero-btns">
+        <button class="btn-yellow" onclick="scrollToSubjects()">📚 Enroll Now — ₦1,000</button>
+        <button class="btn-outline" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">How it Works</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">500+</div><div class="stat-label">Students Enrolled</div></div>
+        <div class="stat"><div class="stat-num">9</div><div class="stat-label">Subjects Available</div></div>
+        <div class="stat"><div class="stat-num">2 Wks</div><div class="stat-label">Intensive Program</div></div>
+      </div>
+    </div>
+    <div class="hero-img-wrap">
+      <div class="hero-img-placeholder">
+        <div class="icon-big">📖</div>
+        <p>Students Already Learning!</p>
+        <p style="font-size:.8rem;opacity:.5">Join them today</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- URGENCY BANNER -->
+<div class="urgency">
+  <div class="urgency-item"><span>🔴</span> Limited Slots Available</div>
+  <div class="urgency-divider">|</div>
+  <div class="urgency-item"><span>⚡</span> Classes Already Ongoing</div>
+  <div class="urgency-divider">|</div>
+  <div class="urgency-item"><span>⏰</span> Don't Be Left Behind — Enroll Today!</div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="section-head">
+      <div class="section-label">Simple Process</div>
+      <h2 class="section-title">How It Works</h2>
+      <p class="section-sub">Get started in minutes and join hundreds of students already preparing.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Pick Your Subject</h3>
+        <p>Choose from 9 JAMB subjects — science, arts, or commercial tracks.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Fill Your Details</h3>
+        <p>Enter your name, phone number, and Telegram username.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Pay ₦1,000</h3>
+        <p>Secure one-time payment via Paystack. Card, bank transfer, or USSD.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Get Access</h3>
+        <p>Join the Telegram group and start learning immediately after approval.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBJECTS -->
+<section id="subjects" style="background:white">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="section-head">
+      <div class="section-label">All Subjects</div>
+      <h2 class="section-title">Choose Your Subject</h2>
+      <p class="section-sub">Each subject is ₦1,000 only. Expert-led, past question focused, Telegram-based classes.</p>
+    </div>
+
+    <!-- SCIENCE -->
+    <div class="subject-group">
+      <div class="group-label">🔬 Science Track</div>
+      <div class="subjects-grid">
+        <div class="subject-card" onclick="openEnroll('Mathematics', '🔢')">
+          <div class="subject-icon">🔢</div>
+          <div class="subject-name">Mathematics</div>
+          <div class="subject-benefit">Ace equations, algebra, statistics & all JAMB math topics with ease.</div>
+          <div class="subject-footer">
+            <div class="subject-price">₦1,000</div>
+            <button class="btn-enroll">Enroll Now</button>
+          </div>
+        </div>
+        <div class="subject-card" onclick="openEnroll('English Language', '📝')">
+          <div class="subject-icon">📝</div>
+          <div class="subject-name">English Language</div>
+          <div class="subject-benefit">Comprehension, grammar, lexis & structure — score 70+ in English.</div>
+          <div class="subject-footer">
+            <div class="subject-price">₦1,000</div>
+            <button class="btn-enroll">Enroll Now</button>
+          </div>
+        </div>
+        <div class="subject-card" onclick="openEnroll('Biology', '🧬')">
+          <div class="subject-icon">🧬</div>
+          <div class="subject-name">Biology</div>
+          <div class="subject-benefit">From genetics to ecology — master all JAMB biology topics fast.</div>
+          <div class="subject-footer">
+            <div class="subject-price">₦1,000</div>
+            <button class="btn-enroll">Enroll Now</button>
+          </div>
+        </div>
+        <div class="subject-card" onclick="openEnroll('Physics', '⚡')">
+          <div class="subject-icon">⚡</div>
+          <div class="subject-name">Physics</div>
+          <div class="subject-benefit">Mechanics, waves, electricity & modern physics — simplified for JAMB.</div>
+          <div class="subject-footer">
+            <div class="subject-price">₦1,000</div>
+            <button class="btn-enroll">Enroll Now</button>
+          </div>
+        </div>
+        <div class="subject-card" onclick="openEnroll('Chemistry', '🧪')">
+          <div class="subject-icon">🧪</div>
+          <div class="subject-name">Chemistry</div>
+          <div class="subject-benefit">Organic, inorganic & physical chemistry — crack every JAMB question.</div>
+          <div class="subject-footer">
+            <div class="subject-price">₦1,000</div>
+            <button class="btn-enroll">Enroll Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARTS & COMMERCIAL -->
+    <div class="subject-group">
+      <div class="group-label">🎭 Arts & Commercial Track</div>
+      <div class="subjects-grid">
+        <div class="subject-card" onclick="openEnroll('Government', '🏛️')">
+          <div class="subject-icon">🏛️</div>
+          <div class="subject-name">Government</div>
+          <div class="subject-benefit">Nigerian politics, constitutions, international relations — all covered.</div>
+          <div class="subject-footer">
+            <div class="subject-price">₦1,000</div>
+            <button class="btn-enroll">Enroll Now</button>
+          </div>
+        </div>
+        <div class="subject-card" onclick="openEnroll('Literature in English', '📚')">
+          <div class="subject-icon">📚</div>
+          <div class="subject-name">Literature in English</div>
+          <div class="subject-benefit">Prose, drama, poetry & oral literature — score high with smart reading.</div>
+          <div class="subject-footer">
+            <div class="subject-price">₦1,000</div>
+            <button class="btn-enroll">Enroll Now</button>
+          </div>
+        </div>
+        <div class="subject-card" onclick="openEnroll('CRS', '✝️')">
+          <div class="subject-icon">✝️</div>
+          <div class="subject-name">CRS</div>
+          <div class="subject-benefit">Old & New Testament, early church history — presented clearly for JAMB.</div>
+          <div class="subject-footer">
+            <div class="subject-price">₦1,000</div>
+            <button class="btn-enroll">Enroll Now</button>
+          </div>
+        </div>
+        <div class="subject-card" onclick="openEnroll('Economics', '📊')">
+          <div class="subject-icon">📊</div>
+          <div class="subject-name">Economics</div>
+          <div class="subject-benefit">Micro, macro, theory of demand & production — simplified for you.</div>
+          <div class="subject-footer">
+            <div class="subject-price">₦1,000</div>
+            <button class="btn-enroll">Enroll Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="section-head">
+      <div class="section-label" style="color:var(--yellow)">Student Reviews</div>
+      <h2 class="section-title">What Students Are Saying</h2>
+      <p class="section-sub">Real results from real students who trusted Shiney Brain.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"I was so confused about Physics but after joining the Shiney Brain bootcamp, everything clicked! Scored 71 in Physics. Best ₦1000 I've ever spent!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">AO</div>
+          <div><div class="testi-name">Adaeze Okonkwo</div><div class="testi-role">Physics Student, Enugu</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"The Maths tutor explained everything step by step. The past questions practice was fire! I went from 45 to 68 in Mathematics. Highly recommend!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">KA</div>
+          <div><div class="testi-name">Kayode Adeyemi</div><div class="testi-role">Maths Student, Lagos</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Government was my nightmare subject but the Shiney Brain class changed everything. The notes were clear, the group was active 24/7. 100% worth it!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">FU</div>
+          <div><div class="testi-name">Fatima Usman</div><div class="testi-role">Government Student, Abuja</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section style="background:white">
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start">
+    <div>
+      <div class="section-label">FAQs</div>
+      <h2 class="section-title">Got Questions?</h2>
+      <p class="section-sub">Everything you need to know about the Shiney Brain JAMB Bootcamp.</p>
+      <div style="margin-top:28px">
+        <p style="font-size:.9rem;color:var(--muted);line-height:1.6">Still have questions? Reach out on WhatsApp:</p>
+        <a href="https://wa.me/2347017083363" target="_blank" style="display:inline-flex;align-items:center;gap:8px;margin-top:12px;background:#25D366;color:white;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:700;font-size:.875rem">
+          💬 Chat on WhatsApp
+        </a>
+      </div>
+    </div>
+    <div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">How do I access classes after payment? <span class="arrow">▼</span></div>
+          <div class="faq-a"><p>After payment, you'll get a Telegram group link. Send your phone number in the group for manual verification and you'll be approved within hours.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Can I pay for more than one subject? <span class="arrow">▼</span></div>
+          <div class="faq-a"><p>Yes! Simply complete the enrollment process for each subject separately. Each subject is ₦1,000.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">How long does the bootcamp last? <span class="arrow">▼</span></div>
+          <div class="faq-a"><p>The bootcamp runs for 2 intensive weeks. Classes are daily with past question drills, notes, and live Q&A sessions.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Is my payment secure? <span class="arrow">▼</span></div>
+          <div class="faq-a"><p>Yes! Payments are processed by Paystack, Nigeria's most trusted payment platform. Your card details are never stored by us.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">What if I don't have Telegram? <span class="arrow">▼</span></div>
+          <div class="faq-a"><p>Download Telegram free from Google Play or App Store. It takes less than 2 minutes to set up.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section style="background:var(--yellow);padding:60px 5%;text-align:center">
+  <h2 style="font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;color:var(--text);margin-bottom:12px">Ready to Crush Your JAMB? 🚀</h2>
+  <p style="font-size:1rem;color:#4B3800;margin-bottom:28px;max-width:480px;margin-left:auto;margin-right:auto">Join hundreds of students already on the path to a high JAMB score. Only ₦1,000 per subject.</p>
+  <button class="btn-yellow" style="background:var(--blue);color:white;font-size:1.1rem;padding:16px 36px" onclick="scrollToSubjects()">
+    📚 Pick a Subject Now
+  </button>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <a class="logo" href="#" style="text-decoration:none;margin-bottom:8px;display:inline-flex">
+      <div class="logo-icon" style="margin-right:10px">🧠</div>
+      <div class="logo-text">Shiney Brain JAMB Bootcamp</div>
+    </a>
+    <p style="margin-top:6px;font-size:.85rem">Helping Nigerian students ace JAMB since 2024.</p>
+  </div>
+  <div style="text-align:right">
+    <p>📞 WhatsApp: <a href="https://wa.me/2347017083363" style="color:var(--yellow)">+234 701 708 3363</a></p>
+    <p style="margin-top:4px">✈️ Telegram: <a href="https://t.me/Mentorflorryshine" style="color:var(--yellow)">@Mentorflorryshine</a></p>
+    <p style="margin-top:12px;font-size:.78rem;opacity:.5">© 2025 Shiney Brain. All rights reserved.</p>
+  </div>
+</footer>
+
+</div>
+<!-- ══ END MAIN PAGE ══ -->
+
+
+<!-- ═══════════════════ SUCCESS PAGE ═══════════════════ -->
+<div id="success-page">
+  <div class="success-card">
+    <div class="success-top">
+      <div class="success-icon">✅</div>
+      <h1>Payment Successful!</h1>
+      <p>Welcome to Shiney Brain Bootcamp. You're one step away from access!</p>
+    </div>
+    <div class="success-body">
+      <h2>📋 What To Do Next</h2>
+      <ul class="steps-list">
+        <li>
+          <div class="step-dot">1</div>
+          <span>Click the <strong>Join Telegram Group</strong> button below to open the group link.</span>
+        </li>
+        <li>
+          <div class="step-dot">2</div>
+          <span>Send a <strong>join request</strong> — the admin will approve you shortly.</span>
+        </li>
+        <li>
+          <div class="step-dot">3</div>
+          <span>Once inside, send your <strong>phone number</strong> for final verification.</span>
+        </li>
+        <li>
+          <div class="step-dot">4</div>
+          <span>Start learning! Notes, past questions & live sessions start immediately.</span>
+        </li>
+      </ul>
+      <div class="action-btns">
+        <a class="btn-telegram" id="telegram-join-btn" href="https://t.me/Mentorflorryshine" target="_blank">
+          ✈️ Join Telegram Group
+        </a>
+        <a class="btn-whatsapp" href="https://wa.me/2347017083363" target="_blank">
+          💬 Chat Admin on WhatsApp
+        </a>
+      </div>
+      <div class="back-link">
+        <a onclick="goBack()">← Enroll in Another Subject</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════ ENROLL MODAL ═══════════════════ -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <h2 id="modal-title">Enroll in Mathematics</h2>
+        <p>Fill in your details to proceed to payment</p>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="selected-subject">
+        <div>
+          <div class="label">Selected Subject</div>
+          <div class="name" id="modal-subject-name">Mathematics</div>
+        </div>
+        <div class="price">₦1,000</div>
+      </div>
+      <div class="form-group">
+        <label for="fullname">Full Name *</label>
+        <input type="text" id="fullname" placeholder="e.g. Adaeze Okonkwo" required />
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone Number *</label>
+        <input type="tel" id="phone" placeholder="e.g. 08012345678" required />
+      </div>
+      <div class="form-group">
+        <label for="telegram">Telegram Username *</label>
+        <input type="text" id="telegram" placeholder="e.g. @adaeze_study" required />
+        <div class="hint">💡 Your Telegram username starts with @. Find it in Telegram Settings.</div>
+      </div>
+      <button class="btn-pay" id="pay-btn" onclick="handlePayment()">
+        🔒 Pay ₦1,000 Securely
+      </button>
+      <div class="secure-note">🔒 Secured by Paystack — Nigeria's trusted payment platform</div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+
+<script>
+  let currentSubject = '';
+  let currentIcon = '';
+
+  // ── SUBJECT TELEGRAM LINKS ──
+  const telegramLinks = {
+    'Mathematics':         'https://t.me/+pEoiXRA2iStjNjhk',
+    'English Language':    'https://t.me/+ChgtoLZ-2rk1MzFk',
+    'Biology':             'https://t.me/+v16ihAX05HFkOWFk',
+    'Chemistry':           'https://t.me/+Z36-AgH6J-9iZmU0',
+    'Literature in English': 'https://t.me/+fUf5B4u0PEU2ZDc0',
+    'Government':          'https://t.me/Mentorflorryshine',
+    // default fallback for subjects without a dedicated link
+    'default':             'https://t.me/Mentorflorryshine'
+  };
+
+  // ── NAVIGATION ──
+  function scrollToSubjects() {
+    document.getElementById('subjects').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function goBack() {
+    document.getElementById('success-page').classList.remove('active');
+    document.getElementById('main-page').style.display = 'block';
+  }
+
+  // ── MODAL ──
+  function openEnroll(subject, icon) {
+    currentSubject = subject;
+    currentIcon = icon;
+    document.getElementById('modal-title').textContent = icon + ' Enroll in ' + subject;
+    document.getElementById('modal-subject-name').textContent = icon + ' ' + subject;
+    document.getElementById('modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  // ── FAQ TOGGLE ──
+  function toggleFaq(el) {
+    const answer = el.nextElementSibling;
+    el.classList.toggle('open');
+    answer.classList.toggle('open');
+  }
+
+  // ── TOAST ──
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+
+  // ── PAYMENT ──
+  function handlePayment() {
+    const name = document.getElementById('fullname').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const telegram = document.getElementById('telegram').value.trim();
+
+    if (!name) { showToast('⚠️ Please enter your full name'); return; }
+    if (!phone || phone.length < 10) { showToast('⚠️ Please enter a valid phone number'); return; }
+    if (!telegram) { showToast('⚠️ Please enter your Telegram username'); return; }
+
+    const btn = document.getElementById('pay-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<div class="spinner"></div> Opening Payment...';
+
+    // Paystack integration
+    const handler = PaystackPop.setup({
+      key: 'pk_test_b7d132db1668d2fcdd5caed65aa73bb7a2b6ab3a',
+      email: phone + '@shineybrain.com',
+      amount: 100000, // ₦1000 in kobo
+      currency: 'NGN',
+      ref: 'SB-' + Math.floor(Math.random() * 1000000000 + 1),
+      metadata: {
+        custom_fields: [
+          { display_name: 'Full Name', variable_name: 'full_name', value: name },
+          { display_name: 'Phone', variable_name: 'phone', value: phone },
+          { display_name: 'Telegram', variable_name: 'telegram', value: telegram },
+          { display_name: 'Subject', variable_name: 'subject', value: currentSubject },
+        ]
+      },
+      callback: function(response) {
+        closeModal();
+        showSuccessPage();
+      },
+      onClose: function() {
+        btn.disabled = false;
+        btn.innerHTML = '🔒 Pay ₦1,000 Securely';
+        showToast('Payment window closed. Try again when ready.');
+      }
+    });
+
+    handler.openIframe();
+  }
+
+  function showSuccessPage() {
+    // Set the subject-specific Telegram link
+    const link = telegramLinks[currentSubject] || telegramLinks['default'];
+    document.getElementById('telegram-join-btn').href = link;
+
+    document.getElementById('main-page').style.display = 'none';
+    document.getElementById('success-page').classList.add('active');
+    window.scrollTo(0, 0);
+  }
+</script>
+</body>
+</html>
